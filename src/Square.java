@@ -6,16 +6,29 @@ public class Square {
     private int location;
     private int price;
 
-    public  Square(String locName, int location, int price){ //create each location in board
+    private Player owner;
+
+    public Square(String locName, int location, int price) { //create each location in board
         name = locName;
         this.location = location;
         this.price = price;
+        owner = null;
+
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
+
     public int getLocation() {
         return location;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setOwner(Player player) {
+        owner = player;
     }
 }

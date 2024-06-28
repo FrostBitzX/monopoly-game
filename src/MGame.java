@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MGame {
-
     private int playerTotal = 0;
     public static final int ROUNDS_TOTAL = 20;
     public static final int PLAYERS_FULL = 8;
@@ -42,7 +41,7 @@ public class MGame {
             }
             System.out.printf("Enter Player %d name: ", i+1);
             String playerName = scanner.nextLine();
-            Player player = new Player(playerName, dice ,board);
+            Player player = new Player(playerName, dice ,board, 100);
             players.add(player);
         }
         scanner.close();
@@ -51,18 +50,28 @@ public class MGame {
         return roundCnt;
     }
     public void playGame(){
-        System.out.println("\n========Welcome to Monopoly Game!========\n");
+        System.out.println("\n========Welcome to Monopoly Game Kasetsart EDITION!========\n");
         for(roundCnt=0; roundCnt<ROUNDS_TOTAL; roundCnt++){
-            System.out.println("----------------------------------");
-            System.out.println("Round" + roundCnt);
+            if(players.size() == 1){
+                break;
+            }
             playRound();
         }
         System.out.println("Game Over");
         System.out.println("----------------------------------");
     }
     public void playRound(){
+        System.out.println("----------------------------------");
+        System.out.println("Round" + roundCnt);
         for(Player player : players){
-            player.takeTurn();
+            if(players.size() == 1){
+                return;
+            }
+            if(player.getMoney() <= 0){
+                players.remove(player);
+            }else {
+                player.takeTurn();
+            }
         }
     }
 }
